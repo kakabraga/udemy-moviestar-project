@@ -34,7 +34,7 @@
             </div>
             <div class="form-group">
               <label for="email">E-mail:</label>
-              <input type="text" readonly class="form-control disabled" id="email" name="email" placeholder="Digite o seu nome" value="<?= $userData->email ?>">
+              <input type="text" readonly class="form-control disabled" id="email" name="email" placeholder="Digite o seu Email" value="<?= $userData->email ?>">
             </div>
             <input type="submit" class="btn card-btn" value="Alterar">
           </div>

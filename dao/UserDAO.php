@@ -50,11 +50,12 @@ class UserDAO implements UserDAOInterface
     public function update(User $user, $redirect = true)
     {
         if (!empty($user)) {
-            $stmt = $this->conn->prepare("UPDATE users SET name = :name, lastname = :lastname, email = :email, token = :token WHERE id = :id");
+            $stmt = $this->conn->prepare("UPDATE users SET name = :name, lastname = :lastname, email = :email, token = :token, bio = :bio WHERE id = :id");
             $stmt->bindParam(':name', $user->name);
             $stmt->bindParam(':lastname', $user->lastname);
             $stmt->bindParam(':email', $user->email);
             $stmt->bindParam(':token', $user->token);
+            $stmt->bindParam(':bio', $user->bio);
             $stmt->bindParam(':id', $user->id);
             $stmt->execute();
             if ($redirect) {
