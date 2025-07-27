@@ -1,5 +1,5 @@
 <?php
-require_once("templates/header.php");
+include_once("templates/header.php");
 ?>
 <div id="main-container" class="container-fluid">
     <div class="col-md-12">
@@ -42,7 +42,7 @@ require_once("templates/header.php");
                     </div>
                     <div class="form-group">
                         <label for="confirmepassword">Confirme sua senha:</label>
-                        <input type="password" class="form-control" name="confirmepassword" id="confirmepassword" placeholder="Confirme sua Senha">
+                        <input type="password" class="form-control" name="confirmpassword" id="confirmpassword" placeholder="Confirme sua Senha">
                     </div>
                     &nbsp
                     <input type="submit" class="btn card-btn" value="Registrar">

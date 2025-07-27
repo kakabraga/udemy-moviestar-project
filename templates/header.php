@@ -1,23 +1,24 @@
 <?php
+
+require_once("globals.php");
 require_once("db.php");
 require_once("dao/UserDAO.php");
 require_once("models/Message.php");
-require_once("globals.php");
 
-  $message = new Message($BASE_URL);
+$message = new Message($BASE_URL);
 
-  $flassMessage = $message->getMessage();
+$flassMessage = $message->getMessage();
 
-  if(!empty($flassMessage["msg"])) {
-    // Limpar a mensagem
-    $message->clearMessage();
-  
-  }
-  $userDao = new UserDAO($conn, $BASE_URL);
-  $userData = $userDao->verifyToken(false);
+if (!empty($flassMessage["msg"])) {
+  // Limpar a mensagem
+  $message->clearMessage();
+}
+$userDao = new UserDAO($conn, $BASE_URL);
+$userData = $userDao->verifyToken(false);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,10 +31,11 @@ require_once("globals.php");
   <!-- CSS do projeto -->
   <link rel="stylesheet" href="<?= $BASE_URL ?>css/styles.css">
 </head>
+
 <body>
   <header>
     <nav id="main-navbar" class="navbar navbar-expand-lg">
-      <a href="<?= $BASE_URL ?>" class="navbar-brand">
+      <a href="<?= $BASE_URL ?>index.php" class="navbar-brand">
         <img src="<?= $BASE_URL ?>img/logo.svg" alt="MovieStar" id="logo">
         <span id="moviestar-title">MovieStar</span>
       </a>
@@ -48,7 +50,7 @@ require_once("globals.php");
       </form>
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav">
-          <?php if($userData): ?>
+          <?php if ($userData): ?>
             <li class="nav-item">
               <a href="<?= $BASE_URL ?>newmovie.php" class="nav-link">
                 <i class="far fa-plus-square"></i> Incluir Filme
@@ -74,7 +76,7 @@ require_once("globals.php");
       </div>
     </nav>
   </header>
-  <?php if(!empty($flassMessage["msg"])): ?>
+  <?php if (!empty($flassMessage["msg"])): ?>
     <div class="msg-container">
       <p class="msg <?= $flassMessage["type"] ?>"><?= $flassMessage["msg"] ?></p>
     </div>

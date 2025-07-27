@@ -50,16 +50,17 @@ class UserDAO implements UserDAOInterface
     public function update(User $user, $redirect = true)
     {
         if (!empty($user)) {
-            $stmt = $this->conn->prepare("UPDATE users SET name = :name, lastname = :lastname, email = :email, token = :token, bio = :bio WHERE id = :id");
+            $stmt = $this->conn->prepare("UPDATE users SET name = :name, lastname = :lastname, email = :email, token = :token, bio = :bio, image = :image WHERE id = :id");
             $stmt->bindParam(':name', $user->name);
             $stmt->bindParam(':lastname', $user->lastname);
             $stmt->bindParam(':email', $user->email);
             $stmt->bindParam(':token', $user->token);
+            $stmt->bindParam(':image', $user->image);
             $stmt->bindParam(':bio', $user->bio);
             $stmt->bindParam(':id', $user->id);
             $stmt->execute();
             if ($redirect) {
-                $this->message->setMessage("Dados atualizados com sucesso", "Success", "editprofile.php");
+                $this->message->setMessage("Dados atualizados com sucesso", "success", "editprofile.php");
             }
         }
     }
@@ -92,7 +93,7 @@ class UserDAO implements UserDAOInterface
         $_SESSION["token"] = $token;
 
         if ($redirect) {
-            $this->message->setMessage("Seja Bem-vendo!", "Success", "editprofile.php");
+            $this->message->setMessage("Seja Bem-vendo!", "success", "editprofile.php");
         }
     }
     public function authenticateUser($email, $password)
@@ -169,9 +170,10 @@ class UserDAO implements UserDAOInterface
     }
     public function destroyToken()
     {
+        // Remove o token
         $_SESSION["token"] = "";
+        // Redireciona e apresenta mensagem de sucesso
         $this->message->setMessage("Você fez o logout com sucesso!", "success", "index.php");
     }
     public function changePassword(User $user) {}
-
 }
